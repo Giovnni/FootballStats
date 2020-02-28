@@ -1,4 +1,4 @@
-package config;
+package core.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import org.springframework.context.annotation.Bean;
@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan(basePackages = "service")
+@ComponentScan(basePackages = "core.service")
 public class AppConfig {
 
     @Bean

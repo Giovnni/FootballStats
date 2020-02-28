@@ -1,9 +1,7 @@
-package entity;
+package core.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
-import java.util.Date;
 
 @Entity
 public class Club extends GenericEntity {

@@ -1,4 +1,4 @@
-package config;
+package core.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -18,7 +18,7 @@ import java.sql.SQLException;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "dao")
+@EnableJpaRepositories(basePackages = "core.dao")
 public class DBConfig {
 
     @Bean(destroyMethod = "close")
