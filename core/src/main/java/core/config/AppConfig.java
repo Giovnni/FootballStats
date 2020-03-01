@@ -12,6 +12,14 @@ import java.util.Properties;
 @ComponentScan(basePackages = "core.service")
 public class AppConfig {
 
+    public static final String DB_HOST = "localhost:3306";
+
+    public static final String DB_SCHEMA = "footballstats";
+
+    public static final String DB_USER = "root";
+
+    public static final String DB_PASSWORD = "root";
+
     @Bean
     public Properties dbProperties() throws IOException {
         Properties props = new Properties();
