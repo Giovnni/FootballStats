@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 public class Player extends GenericEntity {
@@ -12,8 +13,8 @@ public class Player extends GenericEntity {
 
     private String lastname;
 
-    @ManyToOne
-    private Club club;
+    /*@ManyToOne
+    private Club club;*/
 
     @OneToOne
     private Stats stats;
@@ -49,13 +50,13 @@ public class Player extends GenericEntity {
         this.lastname = lastname;
     }
 
-    public Club getClub() {
+    /*public Club getClub() {
         return club;
     }
 
     public void setClub(Club club) {
         this.club = club;
-    }
+    }*/
 
     public Stats getStats() {
         return stats;

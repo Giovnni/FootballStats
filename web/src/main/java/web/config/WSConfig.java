@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
-import org.springframework.web.bind.annotation.RestController;
+import web.controller.RestController;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,8 +19,9 @@ import java.util.List;
 @ImportResource({"classpath:META-INF/cxf/cxf.xml"})
 public class WSConfig {
 
+
     @Bean
-    public Server jaxrsServer(JacksonJsonProvider jsonProvider, Bus cxfBus, List<RestController> controllers) {
+    public Server jaxrsServer(JacksonJsonProvider jsonProvider,Bus cxfBus,List<RestController> controllers){
         JAXRSServerFactoryBean sf = new JAXRSServerFactoryBean();
         List<Object> serviceBeans = new ArrayList<>();
         serviceBeans.addAll(controllers);

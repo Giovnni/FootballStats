@@ -5,6 +5,7 @@ import core.entity.Player;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -27,4 +28,8 @@ public class PlayerService {
     public long countAll() {
         return playerDAO.count();
     }
+
+    public List<Player> findAll() { return playerDAO.findAll();}
+
+    public Player getById(final long playerId) { return playerDAO.getThePlayerId(playerId);}
 }

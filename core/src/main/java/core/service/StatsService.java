@@ -5,6 +5,7 @@ import core.entity.Stats;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -28,4 +29,7 @@ public class StatsService {
         return statsDAO.count();
     }
 
+    public List<Stats> findAll() { return statsDAO.findAll();}
+
+    public Stats getById(final long statsId) { return statsDAO.getTheStatsId(statsId);}
 }
