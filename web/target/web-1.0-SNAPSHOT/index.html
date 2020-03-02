@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html ng-app="footballstats">
+<head>
+    <title>Football Stats</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+<div class="splashscreen d-flex align-items-center justify-content-center ng-cloak">
+    <h1>Football Stats<br/>
+        <small class="text-secondary">loading...</small>
+    </h1>
+</div>
+
+<div class="fluid-container" ng-controller="PlayerController as ctrl">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#2fab8f;">
+            <a class="navbar-brand" href="#">Football Stats</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="#">Clubs</a>
+                    <a class="nav-item nav-link" href="#">Players</a>
+                    <a class="nav-item nav-link" href="#">Coachs</a>
+                    <a class="nav-item nav-link" href="#">Presidents</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{ctrl.selected.lastname}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                    <div class="d-flex d-flex justify-content-center">
+                        <div class="card text-center " style="width: 20rem; margin-bottom:20px">
+                            <div class="card-body">
+                                <p class="card-text text-secondary"><span class="badge badge-secondary">{{ctrl.selected.coach}}</span> - {{ctrl.selected.club}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="text-left">
+                        <p> Stats </p>
+                        <fieldset class="rating">
+                            <input type="radio" id="star5" name="rating" value="5"/><label class="full" for="star5" ng-click="ctrl.addReview(5)" title="Awesome - 5 stars"></label>
+                            <input type="radio" id="star4" name="rating" value="4"/><label class="full" for="star4" ng-click="ctrl.addReview(4)" title="Pretty good - 4 stars"></label>
+                            <input type="radio" id="star3" name="rating" value="3"/><label class="full" for="star3" ng-click="ctrl.addReview(3)" title="Meh - 3 stars"></label>
+                            <input type="radio" id="star2" name="rating" value="2"/><label class="full" for="star2" ng-click="ctrl.addReview(2)" title="Kinda bad - 2 stars"></label>
+                            <input type="radio" id="star1" name="rating" value="1"/><label class="full" for="star1" ng-click="ctrl.addReview(1)" title="Sucks big time - 1 star"></label>
+                        </fieldset>
+                    </div>
+                    <ul class="list-group clearfix">
+                        <li ng-repeat="review in ctrl.selected.reviews | orderBy:'-dateOfReview' " class="list-group-item">
+                            <span class="badge badge-success">{{review.score}}</span><small class="text-muted">   {{review.dateOfReview | date:'yyyy-MM-dd HH:mm:ss'}}</small>
+                            <button type="button" class="close" ng-click="ctrl.deleteReview(review.id)">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <ul class="list-group">
+        <li ng-repeat="(id,lastname) in ctrl.players " class="list-group-item">
+            {{lastname}}
+            <a class="btn btn-primary float-right" href="#" role="button" data-toggle="modal" data-target="#exampleModal" ng-click="ctrl.loadModal(id)">getDetails</a>
+        </li>
+    </ul>
+</div>
+
+<script>
+    angular.module("footballstats", []).controller("PlayerController", function ($http) {
+        var that = this;
+        $http({
+            method: 'GET',
+            url: 'http://localhost:8080/web_war_exploded/api/players/'
+        }).then(function successCallback(response) {
+            that.players = response.data;
+        });
+
+        var refreshSelected = function (playerId) {
+            this.selected = {};
+            $http({
+                method: 'GET',
+                url: 'http://localhost:8080/web_war_exploded/api/players/' + playerId
+            }).then(function successCallback(response) {
+                that.selected = response.data;
+                this.selected.lastname = this.selected.lastname;
+            });
+
+        };
+        this.loadModal = function (playerId) {
+            refreshSelected(playerId);
+        }
+
+        this.addReview = function (score) {
+            var review = {"score": score, "book": {"id": this.selected.id}, "dateOfReview": new Date()};
+            $http({
+                method: 'POST',
+                url: 'http://localhost:8080/lab06/api/reviews',
+                data: review
+            }).then(function successCallback(response) {
+                refreshSelected(that.selected.id);
+            });
+        }
+
+        this.deleteReview = function (reviewId) {
+            $http({
+                method: 'DELETE',
+                url: 'http://localhost:8080/lab06/api/reviews/' + reviewId,
+            }).then(function successCallback(response) {
+                refreshSelected(that.selected.id);
+            });
+        }
+    });
+</script>
+</body>
+</html>
