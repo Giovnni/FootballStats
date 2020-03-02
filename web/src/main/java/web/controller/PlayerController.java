@@ -23,7 +23,7 @@ public class PlayerController implements RestController{
 
     @GET
     @Path("")
-    public Map<Long,String> getPlayer(){
+    public Map<Long,String> getPlayers(){
         List<Player> players = playerService.findAll();
         Map<Long,String> returnedMap = new HashMap<>();
         for(Player player:players){
