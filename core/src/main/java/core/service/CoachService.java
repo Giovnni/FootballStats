@@ -4,6 +4,7 @@ import core.dao.CoachDAO;
 import core.entity.Coach;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -26,4 +27,8 @@ public class CoachService {
     public long countAll() {
         return coachDAO.count();
     }
+
+    public List<Coach> findAll() { return coachDAO.findAll();}
+
+    public Coach getById(final long coachId) { return coachDAO.getTheCoachId(coachId);}
 }

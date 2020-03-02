@@ -5,6 +5,7 @@ import core.entity.President;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -28,4 +29,7 @@ public class PresidentService {
         return presidentDAO.count();
     }
 
+    public List<President> findAll() { return presidentDAO.findAll();}
+
+    public President getById(final long presidentId) { return presidentDAO.getThePresidentId(presidentId);}
 }

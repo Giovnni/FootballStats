@@ -4,6 +4,7 @@ import core.entity.Club;
 import org.springframework.stereotype.Service;
 import core.dao.ClubDAO;
 import javax.transaction.Transactional;
+import java.util.List;
 
 
 @Service
@@ -27,4 +28,8 @@ public class ClubService {
     public long countAll() {
         return clubDAO.count();
     }
+
+    public List<Club> findAll() { return clubDAO.findAll();}
+
+    public Club getById(final long clubId) { return clubDAO.getTheClubId(clubId);}
 }
