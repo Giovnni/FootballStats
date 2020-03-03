@@ -51,4 +51,12 @@ public class PlayerController implements RestController{
         dto.setPosition(player.getPosition());
         return dto;
     }
+
+    @POST
+    @Path("")
+    public void savePlayer(Player player){
+        System.out.println("PlayerController / savePlayer");
+        System.out.println(player.getFirstname() + " " + player.getLastname());
+        playerService.save(player);
+    }
 }

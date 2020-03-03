@@ -15,16 +15,16 @@
 
 <body>
 
-<div class="fluid-container" ng-controller="PlayerController as ctrl">
+<div class="fluid-container" ng-controller="ClubController as ctrl">
     <header>
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#2fab8f;">
-            <a class="navbar-brand" href="http://localhost:8080/web_war_exploded">Football Stats</a>
+            <a class="navbar-brand" href="http://localhost:8080/web_war_exploded/index.html">Football Stats</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="http://localhost:8080/web_war_exploded">Home</a>
+                    <a class="nav-item nav-link" href="http://localhost:8080/web_war_exploded/index.html">Home</a>
                     <a class="nav-item nav-link active" href="http://localhost:8080/web_war_exploded/web/clubs.html">Clubs</a>
                     <a class="nav-item nav-link" href="http://localhost:8080/web_war_exploded/web/players.html">Players</a>
                     <a class="nav-item nav-link" href="http://localhost:8080/web_war_exploded/web/coachs.html">Coachs</a>
@@ -37,47 +37,55 @@
 
     <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item active" ng-repeat="(id,image) in ctrl.players">
-                <img src="{{image}}" class="d-block w-100" alt="...">
+            <div class="carousel-item active">
+                <img src="https://icn.lycee-valin.fr/projets2017/seconde13/eleve8/images/format%20png.png" class="d-block w-100">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>{{image}}</h5>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    <h1 style="color: brown">
+                        Football Clubs in the database
+                    </h1>
+                </div>
+            </div>
+            <div class="carousel-item" ng-repeat="(id,logo) in ctrl.clubs">
+                <img ng-src="{{logo}}" class="d-block w-100">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>{{ctrl.selected.name}}</h5>
                 </div>
             </div>
         </div>
+        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
-
-    <ul class="list-group">
-        <li ng-repeat="(id,lastname) in ctrl.players" class="list-group-item">
-            {{lastname}}
-            <a class="btn btn-primary float-right" href="#" role="button" data-toggle="modal" data-target="#exampleModal" ng-click="ctrl.loadModal(id)">Show the player's information</a>
-        </li>
-    </ul>
 
 </div>
 
 <script>
-    angular.module("footballstats", []).controller("PlayerController", function ($http) {
+    angular.module("footballstats", []).controller("ClubController", function ($http) {
         var that = this;
         $http({
             method: 'GET',
-            url: 'http://localhost:8080/web_war_exploded/api/players/'
+            url: 'http://localhost:8080/web_war_exploded/api/clubs/'
         }).then(function successCallback(response) {
-            that.players = response.data;
+            that.clubs = response.data;
         });
 
-        var refreshSelected = function (playerId) {
+        var refreshSelected = function (clubId) {
             this.selected = {};
             $http({
                 method: 'GET',
-                url: 'http://localhost:8080/web_war_exploded/api/players/' + playerId
+                url: 'http://localhost:8080/web_war_exploded/api/clubs/' + clubId
             }).then(function successCallback(response) {
                 that.selected = response.data;
             });
 
         };
-        this.loadModal = function (playerId) {
-            refreshSelected(playerId);
+        this.loadModal = function (clubId) {
+            refreshSelected(clubId);
         }
     });
 </script>

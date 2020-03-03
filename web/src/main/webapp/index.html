@@ -18,13 +18,13 @@
 <div class="fluid-container" ng-controller="PlayerController as ctrl">
     <header>
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#2fab8f;">
-            <a class="navbar-brand" href="http://localhost:8080/web_war_exploded">Football Stats</a>
+            <a class="navbar-brand" href="http://localhost:8080/web_war_exploded/index.html">Football Stats</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="http://localhost:8080/web_war_exploded">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link active" href="http://localhost:8080/web_war_exploded/index.html">Home <span class="sr-only">(current)</span></a>
                     <a class="nav-item nav-link" href="http://localhost:8080/web_war_exploded/web/clubs.html">Clubs</a>
                     <a class="nav-item nav-link" href="http://localhost:8080/web_war_exploded/web/players.html">Players</a>
                     <a class="nav-item nav-link" href="http://localhost:8080/web_war_exploded/web/coachs.html">Coachs</a>
@@ -34,64 +34,84 @@
         </nav>
     </header>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{ctrl.selected.firstname}} {{ctrl.selected.lastname}}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body ">
-                    <div class="d-flex d-flex justify-content-center">
-                        <div class="card text-center " style="width: 20rem; margin-bottom:20px">
-                            <img class="card-img-top img-thumbnail" ng-src="{{ctrl.selected.image}}">
-                            <div class="card-body">
-                                <p class="card-text text-secondary">
-                                    <span class="badge badge-primary">Pace: {{ctrl.selected.stats.pace}}</span>
-                                    <span class="badge badge-secondary">Shooting: {{ctrl.selected.stats.shooting}}</span>
-                                    <span class="badge badge-success">Passing: {{ctrl.selected.stats.passing}}</span>
-                                    <span class="badge badge-danger">Dribbling: {{ctrl.selected.stats.dribbling}}</span>
-                                    <span class="badge badge-warning">Defending: {{ctrl.selected.stats.defending}}</span>
-                                    <span class="badge badge-info">Physical: {{ctrl.selected.stats.physical}}</span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <hr>
-                    <div class="text-left">
-                        <p> Information </p>
-                        <div class="container">
-                            <div class="row row-cols-2">
-                                <div class="col">Height</div>
-                                <div class="col">{{ctrl.selected.height}}</div>
-                                <div class="col">Weight</div>
-                                <div class="col">{{ctrl.selected.weight}}</div>
-                                <div class="col">Date of Birth</div>
-                                <div class="col">{{ctrl.selected.birthday | date:'dd/MM/yyyy'}}</div>
-                                <div class="col">Country</div>
-                                <div class="col">{{ctrl.selected.country}}</div>
-                                <div class="col">Number</div>
-                                <div class="col">{{ctrl.selected.number}}</div>
-                                <div class="col">Position</div>
-                                <div class="col">{{ctrl.selected.position}}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <br>
+    <div class="d-flex justify-content-center">
+        <h1>
+            Add a player to the database
+        </h1>
+    </div>
+    <br>
+    <form>
+        <div class="row justify-content-md-center">
+            <div class="col-auto">
+                <input type="text" class="form-control" placeholder="First name" ng-model="firstname">
+            </div>
+            <div class="col-auto">
+                <input type="text" class="form-control" placeholder="Last name" ng-model="lastname">
             </div>
         </div>
-    </div>
-
-    <ul class="list-group">
-        <li ng-repeat="(id,lastname) in ctrl.players" class="list-group-item">
-            {{lastname}}
-            <a class="btn btn-primary float-right" href="#" role="button" data-toggle="modal" data-target="#exampleModal" ng-click="ctrl.loadModal(id)">Show the player's information</a>
-        </li>
-    </ul>
+        <br>
+        <div class="row justify-content-md-center">
+            <div class="col-auto">
+                <input type="number" min="0" max="100" class="form-control" placeholder="Pace (0 to 100)" ng-model="pace">
+            </div>
+            <div class="col-auto">
+                <input type="number" min="0" max="100" class="form-control" placeholder="Shooting (0 to 100)" ng-model="shooting">
+            </div>
+        </div>
+        <br>
+        <div class="row justify-content-md-center">
+            <div class="col-auto">
+                <input type="number" min="0" max="100" class="form-control" placeholder="Passing (0 to 100)" ng-model="passing">
+            </div>
+            <div class="col-auto">
+                <input type="number" min="0" max="100" class="form-control" placeholder="Dribbling (0 to 100)" ng-model="dribbling">
+            </div>
+        </div>
+        <br>
+        <div class="row justify-content-md-center">
+            <div class="col-auto">
+                <input type="number" min="0" max="100" class="form-control" placeholder="Defending (0 to 100)" ng-model="defending">
+            </div>
+            <div class="col-auto">
+                <input type="number" min="0" max="100" class="form-control" placeholder="Physical (0 to 100)" ng-model="physical">
+            </div>
+        </div>
+        <br>
+        <div class="row justify-content-md-center">
+            <div class="col-auto">
+                <input type="number" min="0" max="210" class="form-control" placeholder="Height (in cm)" ng-model="height">
+            </div>
+            <div class="col-auto">
+                <input type="number" min="0" max="120" class="form-control" placeholder="Weight (in kg)" ng-model="weight">
+            </div>
+        </div>
+        <br>
+        <div class="row justify-content-md-center">
+            <div class="col-auto">
+                <input type="text" class="form-control" placeholder="Position" ng-model="position">
+            </div>
+            <div class="col-auto">
+                <input type="number" min="0" max="100" class="form-control" placeholder="Number" ng-model="number">
+            </div>
+        </div>
+        <br>
+        <div class="row justify-content-md-center">
+            <div class="col-auto">
+                <input type="text" class="form-control" placeholder="Birthday" ng-model="birthday" onfocus="(this.type='date')" onblur="(this.type='text')" id="date">
+            </div>
+        </div>
+        <br>
+        <div class="row justify-content-md-center">
+            <div class="col-auto">
+                <input type="text" class="form-control" placeholder="Country" ng-model="country">
+            </div>
+        </div>
+        <br>
+        <div class="row justify-content-md-center">
+            <a class="btn btn-primary float-center" href="#" role="button" data-toggle="modal" data-target="#exampleModal" ng-click="ctrl.addPlayer(firstname, lastname, pace, shooting, passing, dribbling, defending, physical, height, weight, position, number, birthday, country)">Add</a>
+        </div>
+    </form>
 </div>
 
 <script>
@@ -116,6 +136,33 @@
         };
         this.loadModal = function (playerId) {
             refreshSelected(playerId);
+        }
+
+        this.addPlayer = function(firstname, lastname, pace, shooting, passing, dribbling, defending, physical, height, weight, position, number, birthday, country) {
+            var player = {
+                "firstname":firstname,
+                "lastname":lastname,
+                "pace":pace,
+                "shooting":shooting,
+                "passing":passing,
+                "dribbling":dribbling,
+                "defending":defending,
+                "physical":physical,
+                "height":height,
+                "weight":weight,
+                "position":position,
+                "number":number,
+                "birthday":birthday,
+                "country":country
+            }
+            $http({
+                method: 'POST',
+                url: 'http://localhost:8080/web_war_exploded/api/players',
+                data: player,
+            }).then(function successCallback(response) {
+                refreshSelected(that.selected.id);
+            });
+            document.location.reload();
         }
     });
 </script>
