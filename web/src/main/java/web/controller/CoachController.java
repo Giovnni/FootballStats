@@ -43,6 +43,7 @@ public class CoachController implements RestController{
         /*dto.setClub(president.getClub());*/
         dto.setCountry(coach.getCountry());
         dto.setBirthday(coach.getBirthday());
+        dto.setImage(coach.getImage());
         return dto;
     }
 }

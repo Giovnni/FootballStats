@@ -18,6 +18,7 @@ public class PlayerDTO {
     private Date birthday;
     private int number;
     private String position;
+    private String image;
 
     public long getId() {
         return id;
@@ -63,6 +64,10 @@ public class PlayerDTO {
         return position;
     }
 
+    public String getImage() {
+        return image;
+    }
+
     public void setId(final long idValue) {
         id = idValue;
     }
@@ -105,5 +110,9 @@ public class PlayerDTO {
 
     public void setPosition(final String positionValue) {
         position = positionValue;
+    }
+
+    public void setImage(final String imageValue) {
+        image = imageValue;
     }
 }

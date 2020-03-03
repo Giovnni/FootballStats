@@ -11,6 +11,7 @@ public class ClubDTO {
     private int yearCreation;
     private Coach coach;
     private President president;
+    private String logo;
 
     public long getId() {
         return id;
@@ -58,5 +59,13 @@ public class ClubDTO {
 
     public void setPresident(final President presidentValue) {
         president = presidentValue;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(final String logoValue) {
+        logo = logoValue;
     }
 }

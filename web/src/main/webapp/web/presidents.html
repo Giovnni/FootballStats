@@ -15,7 +15,7 @@
 
 <body>
 
-<div class="fluid-container" ng-controller="PlayerController as ctrl">
+<div class="fluid-container" ng-controller="PresidentController as ctrl">
     <header>
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#2fab8f;">
             <a class="navbar-brand" href="http://localhost:8080/web_war_exploded">Football Stats</a>
@@ -24,11 +24,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="http://localhost:8080/web_war_exploded">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="http://localhost:8080/web_war_exploded">Home</a>
                     <a class="nav-item nav-link" href="http://localhost:8080/web_war_exploded/web/clubs.html">Clubs</a>
                     <a class="nav-item nav-link" href="http://localhost:8080/web_war_exploded/web/players.html">Players</a>
                     <a class="nav-item nav-link" href="http://localhost:8080/web_war_exploded/web/coachs.html">Coachs</a>
-                    <a class="nav-item nav-link" href="http://localhost:8080/web_war_exploded/web/presidents.html">Presidents</a>
+                    <a class="nav-item nav-link active" href="http://localhost:8080/web_war_exploded/web/presidents.html">Presidents</a>
                 </div>
             </div>
         </nav>
@@ -48,16 +48,6 @@
                     <div class="d-flex d-flex justify-content-center">
                         <div class="card text-center " style="width: 20rem; margin-bottom:20px">
                             <img class="card-img-top img-thumbnail" ng-src="{{ctrl.selected.image}}">
-                            <div class="card-body">
-                                <p class="card-text text-secondary">
-                                    <span class="badge badge-primary">Pace: {{ctrl.selected.stats.pace}}</span>
-                                    <span class="badge badge-secondary">Shooting: {{ctrl.selected.stats.shooting}}</span>
-                                    <span class="badge badge-success">Passing: {{ctrl.selected.stats.passing}}</span>
-                                    <span class="badge badge-danger">Dribbling: {{ctrl.selected.stats.dribbling}}</span>
-                                    <span class="badge badge-warning">Defending: {{ctrl.selected.stats.defending}}</span>
-                                    <span class="badge badge-info">Physical: {{ctrl.selected.stats.physical}}</span>
-                                </p>
-                            </div>
                         </div>
                     </div>
 
@@ -66,18 +56,10 @@
                         <p> Information </p>
                         <div class="container">
                             <div class="row row-cols-2">
-                                <div class="col">Height</div>
-                                <div class="col">{{ctrl.selected.height}}</div>
-                                <div class="col">Weight</div>
-                                <div class="col">{{ctrl.selected.weight}}</div>
                                 <div class="col">Date of Birth</div>
                                 <div class="col">{{ctrl.selected.birthday | date:'dd/MM/yyyy'}}</div>
                                 <div class="col">Country</div>
                                 <div class="col">{{ctrl.selected.country}}</div>
-                                <div class="col">Number</div>
-                                <div class="col">{{ctrl.selected.number}}</div>
-                                <div class="col">Position</div>
-                                <div class="col">{{ctrl.selected.position}}</div>
                             </div>
                         </div>
                     </div>
@@ -87,35 +69,35 @@
     </div>
 
     <ul class="list-group">
-        <li ng-repeat="(id,lastname) in ctrl.players" class="list-group-item">
+        <li ng-repeat="(id,lastname) in ctrl.presidents" class="list-group-item">
             {{lastname}}
-            <a class="btn btn-primary float-right" href="#" role="button" data-toggle="modal" data-target="#exampleModal" ng-click="ctrl.loadModal(id)">Show the player's information</a>
+            <a class="btn btn-primary float-right" href="#" role="button" data-toggle="modal" data-target="#exampleModal" ng-click="ctrl.loadModal(id)">Show the president's information</a>
         </li>
     </ul>
 </div>
 
 <script>
-    angular.module("footballstats", []).controller("PlayerController", function ($http) {
+    angular.module("footballstats", []).controller("PresidentController", function ($http) {
         var that = this;
         $http({
             method: 'GET',
-            url: 'http://localhost:8080/web_war_exploded/api/players/'
+            url: 'http://localhost:8080/web_war_exploded/api/presidents/'
         }).then(function successCallback(response) {
-            that.players = response.data;
+            that.presidents = response.data;
         });
 
-        var refreshSelected = function (playerId) {
+        var refreshSelected = function (presidentId) {
             this.selected = {};
             $http({
                 method: 'GET',
-                url: 'http://localhost:8080/web_war_exploded/api/players/' + playerId
+                url: 'http://localhost:8080/web_war_exploded/api/presidents/' + presidentId
             }).then(function successCallback(response) {
                 that.selected = response.data;
             });
 
         };
-        this.loadModal = function (playerId) {
-            refreshSelected(playerId);
+        this.loadModal = function (presidentId) {
+            refreshSelected(presidentId);
         }
     });
 </script>

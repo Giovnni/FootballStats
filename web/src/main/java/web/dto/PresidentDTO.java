@@ -12,6 +12,7 @@ public class PresidentDTO {
     private Date birthday;
     private String country;
     private Club club;
+    private String image;
 
     public long getId() {
         return id;
@@ -37,6 +38,10 @@ public class PresidentDTO {
         return club;
     }
 
+    public String getImage() {
+        return image;
+    }
+
     public void setId(final long idValue) {
         id = idValue;
     }
@@ -59,5 +64,9 @@ public class PresidentDTO {
 
     public void setClub(final Club clubValue) {
         club = clubValue;
+    }
+
+    public void setImage(final String imageValue) {
+        image = imageValue;
     }
 }

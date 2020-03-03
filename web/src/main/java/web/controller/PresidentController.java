@@ -43,6 +43,7 @@ public class PresidentController implements RestController{
         /*dto.setClub(president.getClub());*/
         dto.setCountry(president.getCountry());
         dto.setBirthday(president.getBirthday());
+        dto.setImage(president.getImage());
         return dto;
     }
 }

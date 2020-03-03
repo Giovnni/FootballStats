@@ -41,6 +41,7 @@ public class ClubController implements RestController{
         dto.setName(club.getName());
         dto.setCountry(club.getCountry());
         dto.setYearCreation(club.getYearCreation());
+        dto.setLogo(club.getLogo());
         /*dto.setCoach(club.getCoach());*/
         /*dto.setPresident(club.getPresident());*/
         return dto;

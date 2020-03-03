@@ -18,6 +18,8 @@ public class President extends GenericEntity {
     @OneToOne
     private Club club;
 
+    private String image;
+
     public President() {
     }
 
@@ -59,5 +61,13 @@ public class President extends GenericEntity {
 
     public void setClub(Club club) {
         this.club = club;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

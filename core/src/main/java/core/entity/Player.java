@@ -31,6 +31,8 @@ public class Player extends GenericEntity {
 
     private String position;
 
+    private String image;
+
     public Player() {
     }
 
@@ -112,5 +114,13 @@ public class Player extends GenericEntity {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(final String imageValue) {
+        this.image = imageValue;
     }
 }

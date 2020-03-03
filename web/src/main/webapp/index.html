@@ -15,26 +15,20 @@
 
 <body>
 
-<div class="splashscreen d-flex align-items-center justify-content-center ng-cloak">
-    <h1>Football Stats<br/>
-        <small class="text-secondary">loading...</small>
-    </h1>
-</div>
-
 <div class="fluid-container" ng-controller="PlayerController as ctrl">
     <header>
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#2fab8f;">
-            <a class="navbar-brand" href="#">Football Stats</a>
+            <a class="navbar-brand" href="http://localhost:8080/web_war_exploded">Football Stats</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="#">Clubs</a>
-                    <a class="nav-item nav-link" href="#">Players</a>
-                    <a class="nav-item nav-link" href="#">Coachs</a>
-                    <a class="nav-item nav-link" href="#">Presidents</a>
+                    <a class="nav-item nav-link active" href="http://localhost:8080/web_war_exploded">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="http://localhost:8080/web_war_exploded/web/clubs.html">Clubs</a>
+                    <a class="nav-item nav-link" href="http://localhost:8080/web_war_exploded/web/players.html">Players</a>
+                    <a class="nav-item nav-link" href="http://localhost:8080/web_war_exploded/web/coachs.html">Coachs</a>
+                    <a class="nav-item nav-link" href="http://localhost:8080/web_war_exploded/web/presidents.html">Presidents</a>
                 </div>
             </div>
         </nav>
@@ -45,7 +39,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{ctrl.selected.lastname}}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{ctrl.selected.firstname}} {{ctrl.selected.lastname}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -53,40 +47,49 @@
                 <div class="modal-body ">
                     <div class="d-flex d-flex justify-content-center">
                         <div class="card text-center " style="width: 20rem; margin-bottom:20px">
+                            <img class="card-img-top img-thumbnail" ng-src="{{ctrl.selected.image}}">
                             <div class="card-body">
-                                <p class="card-text text-secondary"><span class="badge badge-secondary">{{ctrl.selected.coach}}</span> - {{ctrl.selected.club}}</p>
+                                <p class="card-text text-secondary">
+                                    <span class="badge badge-primary">Pace: {{ctrl.selected.stats.pace}}</span>
+                                    <span class="badge badge-secondary">Shooting: {{ctrl.selected.stats.shooting}}</span>
+                                    <span class="badge badge-success">Passing: {{ctrl.selected.stats.passing}}</span>
+                                    <span class="badge badge-danger">Dribbling: {{ctrl.selected.stats.dribbling}}</span>
+                                    <span class="badge badge-warning">Defending: {{ctrl.selected.stats.defending}}</span>
+                                    <span class="badge badge-info">Physical: {{ctrl.selected.stats.physical}}</span>
+                                </p>
                             </div>
                         </div>
                     </div>
 
                     <hr>
                     <div class="text-left">
-                        <p> Stats </p>
-                        <fieldset class="rating">
-                            <input type="radio" id="star5" name="rating" value="5"/><label class="full" for="star5" ng-click="ctrl.addReview(5)" title="Awesome - 5 stars"></label>
-                            <input type="radio" id="star4" name="rating" value="4"/><label class="full" for="star4" ng-click="ctrl.addReview(4)" title="Pretty good - 4 stars"></label>
-                            <input type="radio" id="star3" name="rating" value="3"/><label class="full" for="star3" ng-click="ctrl.addReview(3)" title="Meh - 3 stars"></label>
-                            <input type="radio" id="star2" name="rating" value="2"/><label class="full" for="star2" ng-click="ctrl.addReview(2)" title="Kinda bad - 2 stars"></label>
-                            <input type="radio" id="star1" name="rating" value="1"/><label class="full" for="star1" ng-click="ctrl.addReview(1)" title="Sucks big time - 1 star"></label>
-                        </fieldset>
+                        <p> Information </p>
+                        <div class="container">
+                            <div class="row row-cols-2">
+                                <div class="col">Height</div>
+                                <div class="col">{{ctrl.selected.height}}</div>
+                                <div class="col">Weight</div>
+                                <div class="col">{{ctrl.selected.weight}}</div>
+                                <div class="col">Date of Birth</div>
+                                <div class="col">{{ctrl.selected.birthday | date:'dd/MM/yyyy'}}</div>
+                                <div class="col">Country</div>
+                                <div class="col">{{ctrl.selected.country}}</div>
+                                <div class="col">Number</div>
+                                <div class="col">{{ctrl.selected.number}}</div>
+                                <div class="col">Position</div>
+                                <div class="col">{{ctrl.selected.position}}</div>
+                            </div>
+                        </div>
                     </div>
-                    <ul class="list-group clearfix">
-                        <li ng-repeat="review in ctrl.selected.reviews | orderBy:'-dateOfReview' " class="list-group-item">
-                            <span class="badge badge-success">{{review.score}}</span><small class="text-muted">   {{review.dateOfReview | date:'yyyy-MM-dd HH:mm:ss'}}</small>
-                            <button type="button" class="close" ng-click="ctrl.deleteReview(review.id)">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </li>
-                    </ul>
                 </div>
-
             </div>
         </div>
     </div>
+
     <ul class="list-group">
-        <li ng-repeat="(id,lastname) in ctrl.players " class="list-group-item">
+        <li ng-repeat="(id,lastname) in ctrl.players" class="list-group-item">
             {{lastname}}
-            <a class="btn btn-primary float-right" href="#" role="button" data-toggle="modal" data-target="#exampleModal" ng-click="ctrl.loadModal(id)">getDetails</a>
+            <a class="btn btn-primary float-right" href="#" role="button" data-toggle="modal" data-target="#exampleModal" ng-click="ctrl.loadModal(id)">Show the player's information</a>
         </li>
     </ul>
 </div>
@@ -108,32 +111,11 @@
                 url: 'http://localhost:8080/web_war_exploded/api/players/' + playerId
             }).then(function successCallback(response) {
                 that.selected = response.data;
-                this.selected.lastname = this.selected.lastname;
             });
 
         };
         this.loadModal = function (playerId) {
             refreshSelected(playerId);
-        }
-
-        this.addReview = function (score) {
-            var review = {"score": score, "book": {"id": this.selected.id}, "dateOfReview": new Date()};
-            $http({
-                method: 'POST',
-                url: 'http://localhost:8080/lab06/api/reviews',
-                data: review
-            }).then(function successCallback(response) {
-                refreshSelected(that.selected.id);
-            });
-        }
-
-        this.deleteReview = function (reviewId) {
-            $http({
-                method: 'DELETE',
-                url: 'http://localhost:8080/lab06/api/reviews/' + reviewId,
-            }).then(function successCallback(response) {
-                refreshSelected(that.selected.id);
-            });
         }
     });
 </script>

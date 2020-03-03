@@ -24,8 +24,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="http://localhost:8080/web_war_exploded">Home <span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="http://localhost:8080/web_war_exploded/web/clubs.html">Clubs</a>
+                    <a class="nav-item nav-link" href="http://localhost:8080/web_war_exploded">Home</a>
+                    <a class="nav-item nav-link active" href="http://localhost:8080/web_war_exploded/web/clubs.html">Clubs</a>
                     <a class="nav-item nav-link" href="http://localhost:8080/web_war_exploded/web/players.html">Players</a>
                     <a class="nav-item nav-link" href="http://localhost:8080/web_war_exploded/web/coachs.html">Coachs</a>
                     <a class="nav-item nav-link" href="http://localhost:8080/web_war_exploded/web/presidents.html">Presidents</a>
@@ -34,53 +34,14 @@
         </nav>
     </header>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{ctrl.selected.firstname}} {{ctrl.selected.lastname}}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body ">
-                    <div class="d-flex d-flex justify-content-center">
-                        <div class="card text-center " style="width: 20rem; margin-bottom:20px">
-                            <img class="card-img-top img-thumbnail" ng-src="{{ctrl.selected.image}}">
-                            <div class="card-body">
-                                <p class="card-text text-secondary">
-                                    <span class="badge badge-primary">Pace: {{ctrl.selected.stats.pace}}</span>
-                                    <span class="badge badge-secondary">Shooting: {{ctrl.selected.stats.shooting}}</span>
-                                    <span class="badge badge-success">Passing: {{ctrl.selected.stats.passing}}</span>
-                                    <span class="badge badge-danger">Dribbling: {{ctrl.selected.stats.dribbling}}</span>
-                                    <span class="badge badge-warning">Defending: {{ctrl.selected.stats.defending}}</span>
-                                    <span class="badge badge-info">Physical: {{ctrl.selected.stats.physical}}</span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
 
-                    <hr>
-                    <div class="text-left">
-                        <p> Information </p>
-                        <div class="container">
-                            <div class="row row-cols-2">
-                                <div class="col">Height</div>
-                                <div class="col">{{ctrl.selected.height}}</div>
-                                <div class="col">Weight</div>
-                                <div class="col">{{ctrl.selected.weight}}</div>
-                                <div class="col">Date of Birth</div>
-                                <div class="col">{{ctrl.selected.birthday | date:'dd/MM/yyyy'}}</div>
-                                <div class="col">Country</div>
-                                <div class="col">{{ctrl.selected.country}}</div>
-                                <div class="col">Number</div>
-                                <div class="col">{{ctrl.selected.number}}</div>
-                                <div class="col">Position</div>
-                                <div class="col">{{ctrl.selected.position}}</div>
-                            </div>
-                        </div>
-                    </div>
+    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active" ng-repeat="(id,image) in ctrl.players">
+                <img src="{{image}}" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>{{image}}</h5>
+                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                 </div>
             </div>
         </div>
@@ -92,6 +53,7 @@
             <a class="btn btn-primary float-right" href="#" role="button" data-toggle="modal" data-target="#exampleModal" ng-click="ctrl.loadModal(id)">Show the player's information</a>
         </li>
     </ul>
+
 </div>
 
 <script>

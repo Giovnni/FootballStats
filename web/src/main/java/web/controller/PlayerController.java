@@ -40,6 +40,7 @@ public class PlayerController implements RestController{
         dto.setId(player.getId());
         dto.setLastname(player.getLastname());
         dto.setFirstname(player.getFirstname());
+        dto.setImage(player.getImage());
         /*dto.setClub(player.getClub());*/
         dto.setStats(player.getStats());
         dto.setCountry(player.getCountry());
